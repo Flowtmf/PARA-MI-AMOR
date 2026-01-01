@@ -6,84 +6,61 @@
   <title>PARA TÍ AMOR ❤️</title>
 
   <style>
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background: #fff0f5;
-      overflow: auto;
-    }
+  body {
+    margin: 0;
+    background: #6a0dad; /* morado bonito */
+    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+  }
 
-    .hearts {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-image:
-    radial-gradient(#ffb6c1 2px, transparent 2px),
-    radial-gradient(#ffc0cb 2px, transparent 2px),
-    radial-gradient(#ff69b4 1.5px, transparent 1.5px);
-  background-size: 30px 30px, 45px 45px, 60px 60px;
-  background-position: 0 0, 20px 20px, 10px 10px;
-  opacity: 0.6;
-  z-index: 0;
-    }
+  .hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-    .container {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
+  .heart {
+    position: absolute;
+    opacity: 0.7;
+    animation: float 20s infinite linear;
+  }
 
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      max-width: 700px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
+  .small {
+    font-size: 12px;
+  }
 
-    h1 {
-      color: #e75480;
-      margin-bottom: 20px;
-    }
+  .medium {
+    font-size: 20px;
+  }
 
-    #text {
-      font-size: 17px;
-      color: #444;
-      white-space: pre-wrap;
-      line-height: 1.6;
-      text-align: left;
-    }
+  .large {
+    font-size: 35px;
+  }
 
-    .password-screen {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+  .pink {
+    color: #ff9acb;
+  }
 
-    input {
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
+  .red {
+    color: #ff3b3b;
+  }
 
-    button {
-      padding: 10px;
-      border: none;
-      border-radius: 10px;
-      background: #e75480;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
+  @keyframes float {
+    from {
+      transform: translateY(100vh);
     }
+    to {
+      transform: translateY(-120vh);
+    }
+  }
 
-    button:hover {
-      background: #d64570;
+  .content {
+    position: relative;
+    z-index: 1; /* para que la carta quede encima */
     }
   </style>
 </head>
