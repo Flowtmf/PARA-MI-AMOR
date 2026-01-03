@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adivina cuánto te amo</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Georgia, serif;
+  background:#000;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+.contenedor{
+  text-align:center;
+  padding:20px;
+  width:90%;
+  max-width:350px;
+}
+
+h1{
+  font-size:26px;
+  margin-bottom:20px;
+}
+
+input[type=range]{
+  width:100%;
+  margin:20px 0;
+}
+
+#resultado{
+  margin-top:15px;
+  font-size:18px;
+  opacity:0;
+  transition:opacity 0.5s;
+}
+
+button{
+  margin-top:25px;
+  padding:10px 20px;
+  border-radius:20px;
+  border:1px solid white;
+  background:none;
+  color:white;
+  font-size:14px;
+  cursor:pointer;
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+  <h1>¿Cuánto crees que te amo? 💜</h1>
+
+  <p>Desliza hasta donde tú creas…</p>
+
+  <input type="range" min="0" max="100" value="50" oninput="mostrarMensaje()">
+
+  <div id="resultado">No fue suficiente… 🥺</div>
+
+  <button id="verMas" onclick="irCartas()">
+    Ver cuánto te amo de verdad 💌
+  </button>
+</div>
+
+<script>
+function mostrarMensaje(){
+  const res = document.getElementById("resultado");
+  const btn = document.getElementById("verMas");
+  res.style.opacity = 1;
+  btn.style.display = "inline-block";
+}
+
+function irCartas(){
+  window.location.href = "cartas.html";
+}
+</script>
+
+</body>
+</html>
