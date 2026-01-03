@@ -2,169 +2,180 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Ti 💜</title>
+<title>Cartas para ti 💜</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(180deg, #3c096c, #5a189a, #7b2cbf);
-    color: #f5e9ff;
-    overflow-x: hidden;
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(180deg,#240046,#3c096c,#5a189a,#7b2cbf);
+    color:#f5e9ff;
+    overflow-x:hidden;
 }
 
-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
+section{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.card {
-    background: rgba(255,255,255,0.08);
-    border-radius: 25px;
-    padding: 35px;
-    max-width: 700px;
-    width: 100%;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    backdrop-filter: blur(8px);
-    animation: fadeUp 1.8s ease;
+.wrapper{
+    display:flex;
+    flex-direction:column;
+    gap:120px;
+    padding:100px 20px;
 }
 
-h1, h2 {
-    text-align: center;
-    color: #f3d9ff;
+/* CARTA */
+.envelope{
+    width:320px;
+    height:220px;
+    background:linear-gradient(145deg,#5a189a,#7b2cbf);
+    border-radius:20px;
+    position:relative;
+    cursor:pointer;
+    box-shadow:0 25px 60px rgba(0,0,0,0.4);
+    transition:transform 0.3s ease;
 }
 
-h1 {
-    font-size: 2.4em;
+.envelope:hover{
+    transform:scale(1.03);
 }
 
-p {
-    line-height: 1.7;
-    font-size: 1.1em;
-    text-align: center;
+/* TAPA */
+.envelope::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(145deg,#7b2cbf,#9d4edd);
+    clip-path:polygon(0 0,100% 0,50% 55%);
+    border-radius:20px;
+    z-index:3;
 }
 
-.note {
-    margin-top: 25px;
-    padding: 18px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 18px;
-    cursor: pointer;
-    transition: 0.4s ease;
+/* PAPEL */
+.paper{
+    position:absolute;
+    bottom:10px;
+    left:15px;
+    width:290px;
+    height:180px;
+    background:#f8f0ff;
+    border-radius:15px;
+    color:#4a148c;
+    padding:25px;
+    box-sizing:border-box;
+    transform:translateY(120px);
+    transition:0.8s ease;
+    z-index:1;
+    text-align:center;
+    font-style:italic;
 }
 
-.note:hover {
-    background: rgba(255,255,255,0.18);
-    transform: scale(1.02);
+/* ACTIVA */
+.envelope.open .paper{
+    transform:translateY(-90px);
 }
 
-.hidden-text {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.6s ease;
-    font-style: italic;
-    color: #e0aaff;
-    margin-top: 10px;
+/* TEXTO PAPEL */
+.paper p{
+    margin:0;
+    line-height:1.6;
+    font-size:1.05em;
 }
 
-.note.active .hidden-text {
-    max-height: 200px;
+/* TÍTULO */
+.title{
+    text-align:center;
+    margin-bottom:40px;
+    opacity:0.85;
 }
 
-.scroll-hint {
-    margin-top: 25px;
-    text-align: center;
-    font-size: 0.9em;
-    opacity: 0.8;
+/* PARTICULAS */
+.spark{
+    position:fixed;
+    color:#c77dff;
+    font-size:14px;
+    animation:float 8s linear infinite;
 }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Partículas */
-.particle {
-    position: fixed;
-    font-size: 14px;
-    color: #c77dff;
-    animation: float 8s linear infinite;
-}
-
-@keyframes float {
-    from { transform: translateY(110vh); opacity: 0; }
-    to { transform: translateY(-10vh); opacity: 1; }
+@keyframes float{
+    from{transform:translateY(110vh);opacity:0}
+    to{transform:translateY(-10vh);opacity:1}
 }
 </style>
 </head>
 
 <body>
 
-<!-- PRIMERA CARTA -->
 <section>
-    <div class="card">
-        <h1>Para ti, mi amor 💜</h1>
-        <p>
-            No necesitaba fotos para hacerte esto.  
-            Solo necesitaba sentirte, pensarte  
-            y dejar que el corazón escribiera.
-        </p>
+<div class="wrapper">
 
-        <div class="note" onclick="toggle(this)">
-            💌 Toca aquí
-            <div class="hidden-text">
-                Algo de ti vive en mí…  
-                en mi calma, en mis pensamientos  
-                y en cada vez que sonrío sin razón.
-            </div>
-        </div>
-
-        <div class="scroll-hint">
-            Desliza hacia abajo 💫
-        </div>
-    </div>
-</section>
-
-<!-- SEGUNDA CARTA -->
-<section>
-    <div class="card">
-        <h2>Otra cosa que quiero que sepas 🌙</h2>
-        <p>
-            No prometo perfección,  
-            prometo intención.  
-            Elegirte incluso en los días  
-            donde todo pesa un poco más.
-        </p>
-
-        <div class="note" onclick="toggle(this)">
-            💜 Lee esto también
-            <div class="hidden-text">
-                Eres ese pensamiento bonito  
-                que llega sin avisar  
-                y se queda más tiempo del esperado.
+    <!-- CARTA 1 -->
+    <div>
+        <div class="title">Toca la carta 💌</div>
+        <div class="envelope" onclick="openLetter(this)">
+            <div class="paper">
+                <p>
+                    Algo de ti se quedó conmigo…  
+                    en mi calma,  
+                    en mis pensamientos,  
+                    y en cada sonrisa sin motivo.
+                </p>
             </div>
         </div>
     </div>
+
+    <!-- CARTA 2 -->
+    <div>
+        <div class="title">Desliza… hay más 💜</div>
+        <div class="envelope" onclick="openLetter(this)">
+            <div class="paper">
+                <p>
+                    No te pienso por costumbre,  
+                    te pienso porque el corazón  
+                    no sabe hacerlo de otra forma.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARTA 3 -->
+    <div>
+        <div class="title">Una última 🌙</div>
+        <div class="envelope" onclick="openLetter(this)">
+            <div class="paper">
+                <p>
+                    Elegirte fue fácil.  
+                    Cuidarte es natural.  
+                    Amarte… es inevitable.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
 </section>
 
 <script>
-function toggle(el) {
-    el.classList.toggle("active");
+function openLetter(el){
+    el.classList.toggle("open");
 }
 
-// Partículas
-setInterval(() => {
-    const p = document.createElement("div");
-    p.className = "particle";
-    p.innerText = "✦";
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.animationDuration = (Math.random() * 4 + 5) + "s";
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 9000);
-}, 500);
+// partículas
+setInterval(()=>{
+    const s=document.createElement("div");
+    s.className="spark";
+    s.innerText="✦";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(Math.random()*4+4)+"s";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),8000);
+},600);
 </script>
 
 </body>
