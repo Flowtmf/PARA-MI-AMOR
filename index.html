@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>100 razones para amarte 🖤</title>
+<title>100 razones para amarte</title>
 
 <style>
 *{
@@ -17,6 +17,19 @@ body{
     overflow:hidden;
 }
 
+/* ---------- FONDO CON ROSAS ---------- */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        url('https://i.imgur.com/6YQ9Z8G.png') top left no-repeat,
+        url('https://i.imgur.com/6YQ9Z8G.png') bottom right no-repeat;
+    background-size:220px;
+    opacity:0.25;
+    pointer-events:none;
+}
+
 /* ---------- INICIO ---------- */
 #inicio{
     position:absolute;
@@ -26,51 +39,37 @@ body{
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:30px;
+    padding:25px;
 }
 
 #inicio h1{
-    font-size:2.4em;
-    margin-bottom:12px;
+    font-size:2.2em;
+    margin-bottom:10px;
 }
 
 #inicio p{
-    font-size:1.05em;
-    max-width:520px;
+    font-size:1em;
+    max-width:480px;
     opacity:0.9;
 }
 
-.music-btn{
-    margin-top:20px;
-    padding:14px 22px;
+.music-btn, .start-btn{
+    margin-top:18px;
+    padding:14px 26px;
     border:none;
     border-radius:30px;
-    background:#111;
-    color:#fff;
+    font-size:0.95em;
     cursor:pointer;
-    font-size:1em;
-    transition:0.3s;
 }
 
-.music-btn:hover{
-    background:#222;
-    transform:scale(1.05);
+.music-btn{
+    background:#111;
+    color:#fff;
 }
 
 .start-btn{
-    margin-top:28px;
-    padding:15px 30px;
-    border:none;
-    border-radius:30px;
     background:#fff;
     color:#000;
-    font-size:1em;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.start-btn:hover{
-    transform:scale(1.08);
 }
 
 /* ---------- CARTAS ---------- */
@@ -81,17 +80,24 @@ body{
     justify-content:center;
     align-items:center;
     flex-direction:column;
-    position:relative;
 }
 
+.titulo{
+    font-size:1.1em;
+    margin-bottom:12px;
+    opacity:0.85;
+}
+
+/* ---------- SOBRE ---------- */
 .sobre{
     width:250px;
-    height:170px;
+    height:165px;
     background:#111;
-    border-radius:12px;
+    border-radius:14px;
     position:relative;
     cursor:pointer;
-    box-shadow:0 0 20px rgba(255,255,255,0.15);
+    box-shadow:0 0 18px rgba(255,255,255,0.15);
+    transition:opacity 0.25s;
 }
 
 .sobre::before{
@@ -99,7 +105,7 @@ body{
     position:absolute;
     inset:0;
     background:linear-gradient(135deg,transparent 50%,#1f1f1f 50%);
-    border-radius:12px;
+    border-radius:14px;
 }
 
 .papel{
@@ -108,45 +114,38 @@ body{
     height:125px;
     background:#fff;
     color:#000;
-    top:28px;
+    top:25px;
     left:22px;
-    border-radius:8px;
+    border-radius:10px;
     padding:12px;
     text-align:center;
     font-size:0.95em;
-    transform:translateY(20px);
     opacity:0;
+    transform:translateY(15px);
+    transition:0.35s;
     pointer-events:none;
-    transition:0.45s ease;
 }
 
 .sobre.abierto .papel{
-    transform:translateY(-115px);
     opacity:1;
+    transform:translateY(-110px);
 }
 
-/* ---------- FLECHAS ABAJO CERCA ---------- */
+/* ---------- NAVEGACIÓN CERCA ---------- */
 .navegacion{
     display:flex;
-    gap:60px;
-    margin-top:35px; /* ≈ 2cm debajo de la carta */
+    gap:80px;
+    margin-top:28px;
 }
 
 .flecha{
-    font-size:2.2em;
+    font-size:2.1em;
     cursor:pointer;
-    user-select:none;
     opacity:0.85;
-    transition:0.3s;
-}
-
-.flecha:hover{
-    opacity:1;
-    transform:scale(1.2);
 }
 
 .indicador{
-    margin-top:18px;
+    margin-top:14px;
     font-size:0.85em;
     opacity:0.7;
 }
@@ -155,7 +154,6 @@ body{
 
 <body>
 
-<!-- ---------- AUDIO ---------- -->
 <audio id="audio" loop>
     <source src="cancion.mp3" type="audio/mpeg">
 </audio>
@@ -167,7 +165,6 @@ body{
         Esta canción cada que la escucho tú te me vienes a la mente.<br>
         Esta canción es tuya, porque te la dedico mi vida.
     </p>
-
     <button class="music-btn" onclick="toggleMusic()">🎵 Reproducir canción</button>
     <button class="start-btn" onclick="empezar()">Abrir cartas 💌</button>
 </div>
@@ -175,7 +172,9 @@ body{
 <!-- ---------- CARTAS ---------- -->
 <div id="cartas">
 
-    <div class="sobre" onclick="abrirCarta()">
+    <div class="titulo" id="tituloCarta">Razones para amarte</div>
+
+    <div class="sobre" id="sobre" onclick="abrirCarta()">
         <div class="papel" id="textoCarta"></div>
     </div>
 
@@ -295,42 +294,40 @@ const razones = [
 let actual = 0;
 
 function empezar(){
-    document.getElementById("inicio").style.display="none";
-    document.getElementById("cartas").style.display="flex";
+    inicio.style.display="none";
+    cartas.style.display="flex";
     actualizar();
 }
 
 function abrirCarta(){
-    document.querySelector(".sobre").classList.toggle("abierto");
+    sobre.classList.toggle("abierto");
 }
 
 function cambiar(dir){
-    actual += dir;
-    if(actual < 0) actual = 0;
-    if(actual >= razones.length) actual = razones.length - 1;
-    document.querySelector(".sobre").classList.remove("abierto");
-    actualizar();
+    sobre.style.opacity=0;
+    setTimeout(()=>{
+        actual += dir;
+        if(actual<0) actual=0;
+        if(actual>=razones.length) actual=razones.length-1;
+        sobre.classList.remove("abierto");
+        actualizar();
+        sobre.style.opacity=1;
+    },200);
 }
 
 function actualizar(){
-    document.getElementById("textoCarta").innerText = razones[actual];
-    document.getElementById("contador").innerText =
-        `Carta ${actual + 1} de ${razones.length}`;
+    textoCarta.innerText = razones[actual];
+    contador.innerText = `Carta ${actual+1} de ${razones.length}`;
+    tituloCarta.innerText =
+        actual === razones.length-1 ? "Razón para irme" : "Razones para amarte";
 }
 
-const audio = document.getElementById("audio");
-let sonando = false;
-
+let sonando=false;
 function toggleMusic(){
-    if(!sonando){
-        audio.play();
-        sonando = true;
-    }else{
-        audio.pause();
-        sonando = false;
-    }
+    sonando ? audio.pause() : audio.play();
+    sonando=!sonando;
 }
 </script>
 
 </body>
-</html> 
+</html>
