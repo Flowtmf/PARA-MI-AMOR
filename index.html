@@ -2,331 +2,243 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>100 razones para amarte</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti ❤️</title>
 
 <style>
+:root{
+  --bg: #000;
+  --text: #fff;
+  --card: #111;
+  --border: #333;
+}
+
 *{
-    box-sizing:border-box;
-    font-family:'Georgia', serif;
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;
 }
 
 body{
-    margin:0;
-    background:#000;
-    color:#fff;
-    overflow:hidden;
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
 }
 
-/* ---------- FONDO CON ROSAS ---------- */
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:
-        url('https://i.imgur.com/6YQ9Z8G.png') top left no-repeat,
-        url('https://i.imgur.com/6YQ9Z8G.png') bottom right no-repeat;
-    background-size:220px;
-    opacity:0.25;
-    pointer-events:none;
+/* 🌹 FONDO */
+.roses{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:0.15;
+  font-size:24px;
+}
+.rose{
+  position:absolute;
+  animation: float 18s linear infinite;
+}
+@keyframes float{
+  from{ transform:translateY(110vh); }
+  to{ transform:translateY(-10vh); }
 }
 
-/* ---------- INICIO ---------- */
+/* CONTENEDOR */
+.container{
+  width:100%;
+  max-width:380px;
+  padding:20px;
+  text-align:center;
+  z-index:2;
+}
+
+/* INICIO */
 #inicio{
-    position:absolute;
-    inset:0;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:25px;
+  margin-bottom:30px;
 }
-
 #inicio h1{
-    font-size:2.2em;
-    margin-bottom:10px;
+  font-size:20px;
+  margin-bottom:12px;
 }
-
 #inicio p{
-    font-size:1em;
-    max-width:480px;
-    opacity:0.9;
+  font-size:14px;
+  opacity:0.85;
+  margin-bottom:12px;
+}
+#playBtn{
+  padding:10px 16px;
+  background:#fff;
+  color:#000;
+  border:none;
+  border-radius:20px;
+  font-size:14px;
 }
 
-.music-btn, .start-btn{
-    margin-top:18px;
-    padding:14px 26px;
-    border:none;
-    border-radius:30px;
-    font-size:0.95em;
-    cursor:pointer;
+/* CARTA */
+.card-wrapper{
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
 }
 
-.music-btn{
-    background:#111;
-    color:#fff;
+.card{
+  width:260px;
+  height:160px;
+  background: var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:14px;
+  cursor:pointer;
 }
 
-.start-btn{
-    background:#fff;
-    color:#000;
+.card.closed::after{
+  content:"💌 Toca la carta";
+  opacity:0.8;
 }
 
-/* ---------- CARTAS ---------- */
-#cartas{
-    display:none;
-    height:100vh;
-    width:100vw;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
+.card.open{
+  cursor:default;
 }
 
-.titulo{
-    font-size:1.1em;
-    margin-bottom:12px;
-    opacity:0.85;
+.card.open::after{
+  content:"";
 }
 
-/* ---------- SOBRE ---------- */
-.sobre{
-    width:250px;
-    height:165px;
-    background:#111;
-    border-radius:14px;
-    position:relative;
-    cursor:pointer;
-    box-shadow:0 0 18px rgba(255,255,255,0.15);
-    transition:opacity 0.25s;
+.card-text{
+  display:none;
+  font-size:14px;
+  line-height:1.4;
 }
 
-.sobre::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(135deg,transparent 50%,#1f1f1f 50%);
-    border-radius:14px;
+.card.open .card-text{
+  display:block;
 }
 
-.papel{
-    position:absolute;
-    width:205px;
-    height:125px;
-    background:#fff;
-    color:#000;
-    top:25px;
-    left:22px;
-    border-radius:10px;
-    padding:12px;
-    text-align:center;
-    font-size:0.95em;
-    opacity:0;
-    transform:translateY(15px);
-    transition:0.35s;
-    pointer-events:none;
+/* FLECHAS */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  width:260px;
+  margin:12px auto 6px;
 }
 
-.sobre.abierto .papel{
-    opacity:1;
-    transform:translateY(-110px);
+.nav button{
+  background:none;
+  border:none;
+  color:white;
+  font-size:22px;
 }
 
-/* ---------- NAVEGACIÓN CERCA ---------- */
-.navegacion{
-    display:flex;
-    gap:80px;
-    margin-top:28px;
-}
-
-.flecha{
-    font-size:2.1em;
-    cursor:pointer;
-    opacity:0.85;
-}
-
-.indicador{
-    margin-top:14px;
-    font-size:0.85em;
-    opacity:0.7;
+/* CONTADOR */
+.counter{
+  font-size:12px;
+  opacity:0.7;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="audio" loop>
-    <source src="cancion.mp3" type="audio/mpeg">
-</audio>
+<!-- 🌹 -->
+<div class="roses" id="roses"></div>
 
-<!-- ---------- INICIO ---------- -->
-<div id="inicio">
-    <h1>100 razones para amarte 🥺💗</h1>
+<div class="container">
+
+  <!-- INICIO -->
+  <div id="inicio">
+    <h1>Esta canción es tuya 🎶</h1>
     <p>
-        Esta canción cada que la escucho tú te me vienes a la mente.<br>
-        Esta canción es tuya, porque te la dedico mi vida.
+      Esta canción cada que la escucho tú te me vienes a la mente.  
+      Te la dedico, mi vida.
     </p>
-    <button class="music-btn" onclick="toggleMusic()">🎵 Reproducir canción</button>
-    <button class="start-btn" onclick="empezar()">Abrir cartas 💌</button>
-</div>
+    <button id="playBtn">▶ Reproducir</button>
+    <audio id="audio" src="TU_CANCION.mp3"></audio>
+  </div>
 
-<!-- ---------- CARTAS ---------- -->
-<div id="cartas">
-
-    <div class="titulo" id="tituloCarta">Razones para amarte</div>
-
-    <div class="sobre" id="sobre" onclick="abrirCarta()">
-        <div class="papel" id="textoCarta"></div>
+  <!-- CARTAS -->
+  <div class="card-wrapper">
+    <div class="card closed" id="card">
+      <div class="card-text" id="cardText"></div>
     </div>
+  </div>
 
-    <div class="navegacion">
-        <div class="flecha" onclick="cambiar(-1)">←</div>
-        <div class="flecha" onclick="cambiar(1)">→</div>
-    </div>
+  <!-- FLECHAS -->
+  <div class="nav">
+    <button onclick="prev()">←</button>
+    <button onclick="next()">→</button>
+  </div>
 
-    <div class="indicador" id="contador"></div>
+  <div class="counter" id="counter"></div>
+
 </div>
 
 <script>
-const razones = [
-"Tú sonrisa",
-"tus ojitos y tu lunar en uno de ellos",
-"tu pelo",
-"tu risa",
-"tus manos",
-"tus labios",
-"tu forma de querer",
-"tu sentido del humor",
-"tu corazón",
-"tu carácter",
-"tu inteligencia",
-"la manera en la que piensas",
-"tus pestañas",
-"tu honestidad",
-"tu lealtad",
-"tu voz",
-"lo sensible que eres",
-"tu niña interior",
-"tus regaños",
-"tus celos",
-"tu alegría",
-"tu seguridad",
-"tu perspectiva de todo",
-"tu apoyo",
-"tu sencillez",
-"tu cariño inmenso",
-"tus chistes malos",
-"tu carisma",
-"tu calma",
-"la forma en que me aconsejas",
-"la manera en que te preocupas por mí",
-"tu timidez",
-"tu tristeza",
-"tu amargura",
-"tu atención",
-"tu orgullo",
-"tu fortaleza",
-"tu manera de hablar",
-"tu manera de escuchar",
-"tu energía",
-"la forma única que eres",
-"tu madurez",
-"lo linda que estás",
-"como me haces reír",
-"como me haces amarte",
-"tu amor",
-"como me entiendes",
-"tus locuras",
-"tus defectos",
-"tus cualidades",
-"tus valores",
-"tus burlas",
-"tu paz",
-"tu energía",
-"lo mucho que duermes",
-"tu forma de vestir",
-"lo mucho que te esfuerzas",
-"el como te hago enojar",
-"tus berrinches",
-"tus dones",
-"tu ternura",
-"tus manitas",
-"tu optimismo",
-"tu brillo",
-"tu alma",
-"tu resistencia",
-"tu toque a la vida",
-"lo positiva que eres",
-"siempre muestras quien eres",
-"tu transparencia",
-"tus (Te quiero)",
-"tu lado protector",
-"tus (Te amo)",
-"tus (buenos días)",
-"tus abrazos",
-"tu dedicación a lo que te gusta",
-"el día que nos besamos por primera vez",
-"nuestra conexión",
-"me comprendes (aunque te enojas)",
-"me escuchas",
-"tus locuras",
-"tu orgullo",
-"tu sarcasmo",
-"tu forma de enojarte",
-"tus mensajes 🥺",
-"tus gustos",
-"tu estilo",
-"tus (Te extraño 🥺)",
-"tu valentía",
-"junto a ti todo es mejor",
-"tus apodos hacia mí",
-"cuando me dedicas videos",
-"me ayudas a creer en mí",
-"tu paciencia",
-"tus bechitos",
-"la manera en que me has hecho cambiar a bien",
-"la forma que soy cuando hablo contigo",
-"tu amor a mí 🥺",
-"la forma que expresas tus sentimientos",
-"TODO DE TI LO AMO 💘",
-"Ninguna. Quiero que solo seas tú y nadie más 🥹"
+/* 🌹 generar rosas */
+const roses = document.getElementById("roses");
+for(let i=0;i<40;i++){
+  const r = document.createElement("div");
+  r.className="rose";
+  r.innerText="🌹";
+  r.style.left=Math.random()*100+"%";
+  r.style.animationDuration=(10+Math.random()*15)+"s";
+  r.style.fontSize=(16+Math.random()*20)+"px";
+  roses.appendChild(r);
+}
+
+/* 🎶 música */
+const audio=document.getElementById("audio");
+document.getElementById("playBtn").onclick=()=>{
+  audio.paused?audio.play():audio.pause();
+};
+
+/* 💌 CARTAS */
+const cartas=[
+  "Razón #1: Porque contigo todo se siente hogar.",
+  "Razón #2: Porque tu risa me calma el alma.",
+  "Razón #3: Porque elegirte es fácil todos los días.",
+  "Razón #4: Porque eres mi lugar seguro.",
+  "Razón #5: Porque te amo más de lo que sé decir."
 ];
 
-let actual = 0;
+let index=0;
+let abierta=false;
 
-function empezar(){
-    inicio.style.display="none";
-    cartas.style.display="flex";
-    actualizar();
+const card=document.getElementById("card");
+const text=document.getElementById("cardText");
+const counter=document.getElementById("counter");
+
+function render(){
+  card.className="card closed";
+  text.style.display="none";
+  text.innerText="";
+  abierta=false;
+  counter.innerText=`Carta ${index+1} de ${cartas.length}`;
 }
 
-function abrirCarta(){
-    sobre.classList.toggle("abierto");
+card.onclick=()=>{
+  if(abierta) return;
+  text.innerText=cartas[index];
+  card.className="card open";
+  text.style.display="block";
+  abierta=true;
+};
+
+function next(){
+  index=(index+1)%cartas.length;
+  render();
+}
+function prev(){
+  index=(index-1+cartas.length)%cartas.length;
+  render();
 }
 
-function cambiar(dir){
-    sobre.style.opacity=0;
-    setTimeout(()=>{
-        actual += dir;
-        if(actual<0) actual=0;
-        if(actual>=razones.length) actual=razones.length-1;
-        sobre.classList.remove("abierto");
-        actualizar();
-        sobre.style.opacity=1;
-    },200);
-}
-
-function actualizar(){
-    textoCarta.innerText = razones[actual];
-    contador.innerText = `Carta ${actual+1} de ${razones.length}`;
-    tituloCarta.innerText =
-        actual === razones.length-1 ? "Razón para irme" : "Razones para amarte";
-}
-
-let sonando=false;
-function toggleMusic(){
-    sonando ? audio.pause() : audio.play();
-    sonando=!sonando;
-}
+render();
 </script>
 
 </body>
