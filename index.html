@@ -3,141 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Ti ❤️</title>
+<title>100 razones para amarte</title>
 
 <style>
-:root{
-  --bg: #000;
-  --text: #fff;
-  --card: #111;
-  --border: #333;
-}
-
-*{
-  box-sizing: border-box;
-  font-family: 'Georgia', serif;
-}
-
 body{
   margin:0;
-  background: var(--bg);
-  color: var(--text);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  font-family: 'Georgia', serif;
+  background:#000;
+  color:#fff;
   overflow:hidden;
 }
 
-/* 🌹 FONDO */
-.roses{
+/* Fondo rosas */
+.fondo{
   position:fixed;
   inset:0;
-  pointer-events:none;
-  opacity:0.15;
-  font-size:24px;
-}
-.rose{
-  position:absolute;
-  animation: float 18s linear infinite;
-}
-@keyframes float{
-  from{ transform:translateY(110vh); }
-  to{ transform:translateY(-10vh); }
+  z-index:-1;
+  opacity:0.12;
+  font-size:28px;
+  line-height:1.5;
 }
 
-/* CONTENEDOR */
-.container{
-  width:100%;
-  max-width:380px;
-  padding:20px;
-  text-align:center;
-  z-index:2;
-}
-
-/* INICIO */
-#inicio{
-  margin-bottom:30px;
-}
-#inicio h1{
-  font-size:20px;
-  margin-bottom:12px;
-}
-#inicio p{
-  font-size:14px;
-  opacity:0.85;
-  margin-bottom:12px;
-}
-#playBtn{
-  padding:10px 16px;
-  background:#fff;
-  color:#000;
-  border:none;
-  border-radius:20px;
-  font-size:14px;
-}
-
-/* CARTA */
-.card-wrapper{
+/* Contenedor */
+.contenedor{
+  min-height:100vh;
   display:flex;
-  justify-content:center;
-  margin-top:10px;
-}
-
-.card{
-  width:260px;
-  height:160px;
-  background: var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;
-  display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  padding:14px;
+  padding:20px;
+}
+
+/* Título */
+.titulo{
+  font-size:30px;
+  text-align:center;
+  margin-bottom:10px;
+  text-shadow:0 0 10px rgba(255,255,255,0.4);
+}
+
+.subtitulo{
+  font-size:14px;
+  opacity:0.8;
+  margin-bottom:20px;
+  text-align:center;
+}
+
+/* Música */
+.musica{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.musica button{
+  margin-top:10px;
+  padding:10px 20px;
+  border-radius:20px;
+  border:1px solid white;
+  background:none;
+  color:white;
   cursor:pointer;
 }
 
-.card.closed::after{
-  content:"💌 Toca la carta";
-  opacity:0.8;
-}
-
-.card.open{
-  cursor:default;
-}
-
-.card.open::after{
-  content:"";
-}
-
-.card-text{
-  display:none;
-  font-size:14px;
-  line-height:1.4;
-}
-
-.card.open .card-text{
-  display:block;
-}
-
-/* FLECHAS */
-.nav{
+/* Carta */
+.carta{
+  width:90%;
+  max-width:330px;
+  min-height:150px;
+  background:#111;
+  border-radius:14px;
+  padding:20px;
   display:flex;
-  justify-content:space-between;
-  width:260px;
-  margin:12px auto 6px;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:18px;
+  box-shadow:0 0 15px rgba(255,255,255,0.2);
 }
 
-.nav button{
+/* Flechas */
+.navegacion{
+  margin-top:15px;
+  display:flex;
+  gap:60px;
+}
+
+button.flecha{
   background:none;
   border:none;
   color:white;
-  font-size:22px;
+  font-size:30px;
+  cursor:pointer;
 }
 
-/* CONTADOR */
-.counter{
-  font-size:12px;
+/* Contador */
+.contador{
+  margin-top:8px;
+  font-size:13px;
   opacity:0.7;
 }
 </style>
@@ -145,100 +107,175 @@ body{
 
 <body>
 
-<!-- 🌹 -->
-<div class="roses" id="roses"></div>
+<div class="fondo">
+🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹<br>
+🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹<br>
+🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹
+</div>
 
-<div class="container">
+<div class="contenedor">
 
-  <!-- INICIO -->
   <div id="inicio">
-    <h1>Esta canción es tuya 🎶</h1>
-    <p>
-      Esta canción cada que la escucho tú te me vienes a la mente.  
-      Te la dedico, mi vida.
-    </p>
-    <button id="playBtn">▶ Reproducir</button>
-    <audio id="audio" src="TU_CANCION.mp3"></audio>
-  </div>
+    <h1 class="titulo">100 razones para amarte 🥺💗</h1>
+    <p class="subtitulo">Cada carta es un pedacito de lo que siento por ti</p>
 
-  <!-- CARTAS -->
-  <div class="card-wrapper">
-    <div class="card closed" id="card">
-      <div class="card-text" id="cardText"></div>
+    <div class="musica">
+      <p>
+      Esta canción cada que la escucho tú te me vienes a la mente.<br>
+      Esta canción es tuya, porque te la dedico mi vida.
+      </p>
+      <button onclick="toggleMusic()">▶ Reproducir canción</button>
+      <audio id="song" src="TU_CANCION_AQUI.mp3"></audio>
     </div>
   </div>
 
-  <!-- FLECHAS -->
-  <div class="nav">
-    <button onclick="prev()">←</button>
-    <button onclick="next()">→</button>
+  <div class="carta" id="textoCarta"></div>
+
+  <div class="navegacion">
+    <button class="flecha" onclick="anterior()">←</button>
+    <button class="flecha" onclick="siguiente()">→</button>
   </div>
 
-  <div class="counter" id="counter"></div>
+  <div class="contador" id="contador"></div>
 
 </div>
 
 <script>
-/* 🌹 generar rosas */
-const roses = document.getElementById("roses");
-for(let i=0;i<40;i++){
-  const r = document.createElement("div");
-  r.className="rose";
-  r.innerText="🌹";
-  r.style.left=Math.random()*100+"%";
-  r.style.animationDuration=(10+Math.random()*15)+"s";
-  r.style.fontSize=(16+Math.random()*20)+"px";
-  roses.appendChild(r);
-}
-
-/* 🎶 música */
-const audio=document.getElementById("audio");
-document.getElementById("playBtn").onclick=()=>{
-  audio.paused?audio.play():audio.pause();
-};
-
-/* 💌 CARTAS */
-const cartas=[
-  "Razón #1: Porque contigo todo se siente hogar.",
-  "Razón #2: Porque tu risa me calma el alma.",
-  "Razón #3: Porque elegirte es fácil todos los días.",
-  "Razón #4: Porque eres mi lugar seguro.",
-  "Razón #5: Porque te amo más de lo que sé decir."
+const cartas = [
+"Tú sonrisa",
+"tus ojitos y tú lunar en uno de ellos",
+"tú pelo",
+"tú risa",
+"tus manos",
+"tus labios",
+"tú forma de querer",
+"tú sentido del humor",
+"tú corazón",
+"tú carácter",
+"tú inteligencia",
+"la manera en la que piensas",
+"tus pestañas",
+"tú honestidad",
+"tú lealtad",
+"tú voz",
+"lo sensible que eres",
+"tú niña interior",
+"tus regaños",
+"tus celos",
+"tú alegría",
+"tú seguridad",
+"tú perspectiva de todo",
+"tú apoyo",
+"tú sencillez",
+"tú cariño inmenso",
+"tus chistes malos",
+"tú carisma",
+"tú calma",
+"la forma en que me aconsejas",
+"la manera en que te preocupas por mí",
+"tú timidez",
+"tú tristeza",
+"tú amargura",
+"tú atención",
+"tú orgullo",
+"tú fortaleza",
+"tú manera de hablar",
+"tú manera de escuchar",
+"tú energía",
+"la forma única que eres",
+"tú madures",
+"lo linda que estas",
+"como me haces reír",
+"como me haces amarte",
+"tú amor",
+"como me entiendes",
+"tus locuras",
+"tus defectos",
+"tus cualidades",
+"tus valores",
+"tus burlas",
+"tú paz",
+"tú energía",
+"lo mucho que duermes",
+"tú forma de vestir",
+"lo mucho que te esfuerzas",
+"el como te hago enojar",
+"tus berrinches",
+"tus dones",
+"tú ternura",
+"tus manitas",
+"tú optimismo",
+"tú brillo",
+"tú alma",
+"tú resistencia",
+"tú toque a la vida",
+"lo positiva que eres",
+"siempre muestras quien eres",
+"tú transparencia",
+"tus (Te quiero)",
+"tú lado protector",
+"tus ( Te amo )",
+"tus ( buenos días)",
+"tus abrazos",
+"tú dedicación a lo que te gusta",
+"el día que nos besamos por primera vez",
+"nuestra conexión",
+"me comprendes (Aunque te me enojas)",
+"me escuchas",
+"tus locuras",
+"tú orgullo",
+"tú sarcasmo",
+"Tu forma de enojarte porque no te digo a dónde voy",
+"tus mensajes 🥺",
+"tus gustos",
+"tú estilo",
+"tus ( Te extraño 🥺)",
+"tú valentía",
+"junto a tí es todo mejor",
+"tus apodos hacia a mí",
+"cuando me dedicas videos (En tik tok muy poco)",
+"me ayudas a creer en mi",
+"tú paciencia",
+"tus bechitos",
+"la manera en la que me has echo cambiar a bien",
+"la forma que soy cuando hablo contigo",
+"tú amor a mi 🥺",
+"la forma que expresa tus sentimientos",
+"TODO DE TÍ LO AMO ♥️"
 ];
 
-let index=0;
-let abierta=false;
+let index = 0;
+const inicio = document.getElementById("inicio");
 
-const card=document.getElementById("card");
-const text=document.getElementById("cardText");
-const counter=document.getElementById("counter");
-
-function render(){
-  card.className="card closed";
-  text.style.display="none";
-  text.innerText="";
-  abierta=false;
-  counter.innerText=`Carta ${index+1} de ${cartas.length}`;
+function mostrar(){
+  if(index > 0){
+    inicio.style.display = "none";
+  }
+  document.getElementById("textoCarta").textContent = cartas[index];
+  document.getElementById("contador").textContent =
+    `Carta ${index+1} de ${cartas.length}`;
 }
 
-card.onclick=()=>{
-  if(abierta) return;
-  text.innerText=cartas[index];
-  card.className="card open";
-  text.style.display="block";
-  abierta=true;
-};
-
-function next(){
-  index=(index+1)%cartas.length;
-  render();
-}
-function prev(){
-  index=(index-1+cartas.length)%cartas.length;
-  render();
+function siguiente(){
+  if(index < cartas.length - 1){
+    index++;
+    mostrar();
+  }
 }
 
-render();
+function anterior(){
+  if(index > 0){
+    index--;
+    mostrar();
+  }
+}
+
+function toggleMusic(){
+  const song = document.getElementById("song");
+  song.paused ? song.play() : song.pause();
+}
+
+mostrar();
 </script>
 
 </body>
