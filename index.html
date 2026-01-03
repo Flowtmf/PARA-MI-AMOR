@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>100 razones para amarte 💜</title>
+<title>100 razones para amarte 🖤</title>
 
 <style>
 *{
@@ -12,8 +12,8 @@
 
 body{
     margin:0;
-    background:linear-gradient(180deg,#1a082d,#2b124c,#1a082d);
-    color:#f5e9ff;
+    background:#000;
+    color:#fff;
     overflow:hidden;
 }
 
@@ -29,20 +29,15 @@ body{
     padding:30px;
 }
 
-#inicio h1,
-#inicio p{
-    text-shadow:0 2px 6px rgba(0,0,0,0.6);
-}
-
 #inicio h1{
-    font-size:2.5em;
-    margin-bottom:10px;
+    font-size:2.4em;
+    margin-bottom:12px;
 }
 
 #inicio p{
-    font-size:1.1em;
+    font-size:1.05em;
     max-width:520px;
-    opacity:0.95;
+    opacity:0.9;
 }
 
 .music-btn{
@@ -50,26 +45,25 @@ body{
     padding:14px 22px;
     border:none;
     border-radius:30px;
-    background:rgba(255,255,255,0.15);
+    background:#111;
     color:#fff;
     cursor:pointer;
     font-size:1em;
-    backdrop-filter:blur(6px);
     transition:0.3s;
 }
 
 .music-btn:hover{
-    background:rgba(255,255,255,0.3);
+    background:#222;
     transform:scale(1.05);
 }
 
 .start-btn{
-    margin-top:30px;
+    margin-top:28px;
     padding:15px 30px;
     border:none;
     border-radius:30px;
-    background:#c084fc;
-    color:#2b124c;
+    background:#fff;
+    color:#000;
     font-size:1em;
     cursor:pointer;
     transition:0.3s;
@@ -86,35 +80,36 @@ body{
     width:100vw;
     justify-content:center;
     align-items:center;
+    flex-direction:column;
     position:relative;
 }
 
 .sobre{
-    width:260px;
-    height:180px;
-    background:#3b1663;
+    width:250px;
+    height:170px;
+    background:#111;
     border-radius:12px;
     position:relative;
     cursor:pointer;
-    box-shadow:0 0 25px rgba(192,132,252,0.45);
+    box-shadow:0 0 20px rgba(255,255,255,0.15);
 }
 
 .sobre::before{
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(135deg,transparent 50%,#4b1b78 50%);
+    background:linear-gradient(135deg,transparent 50%,#1f1f1f 50%);
     border-radius:12px;
 }
 
 .papel{
     position:absolute;
-    width:210px;
-    height:130px;
-    background:#f5e9ff;
-    color:#2b124c;
-    top:30px;
-    left:25px;
+    width:205px;
+    height:125px;
+    background:#fff;
+    color:#000;
+    top:28px;
+    left:22px;
     border-radius:8px;
     padding:12px;
     text-align:center;
@@ -122,39 +117,38 @@ body{
     transform:translateY(20px);
     opacity:0;
     pointer-events:none;
-    transition:0.5s ease;
+    transition:0.45s ease;
 }
 
 .sobre.abierto .papel{
-    transform:translateY(-120px);
+    transform:translateY(-115px);
     opacity:1;
 }
 
-/* ---------- FLECHAS ---------- */
+/* ---------- FLECHAS ABAJO CERCA ---------- */
+.navegacion{
+    display:flex;
+    gap:60px;
+    margin-top:35px; /* ≈ 2cm debajo de la carta */
+}
+
 .flecha{
-    position:absolute;
-    bottom:25px;
     font-size:2.2em;
     cursor:pointer;
     user-select:none;
-    padding:10px 20px;
-    opacity:0.8;
+    opacity:0.85;
     transition:0.3s;
 }
 
 .flecha:hover{
     opacity:1;
-    transform:scale(1.15);
+    transform:scale(1.2);
 }
 
-#prev{ left:30%; }
-#next{ right:30%; }
-
 .indicador{
-    position:absolute;
-    bottom:70px;
-    font-size:0.9em;
-    opacity:0.85;
+    margin-top:18px;
+    font-size:0.85em;
+    opacity:0.7;
 }
 </style>
 </head>
@@ -180,12 +174,15 @@ body{
 
 <!-- ---------- CARTAS ---------- -->
 <div id="cartas">
+
     <div class="sobre" onclick="abrirCarta()">
         <div class="papel" id="textoCarta"></div>
     </div>
 
-    <div class="flecha" id="prev" onclick="cambiar(-1)">←</div>
-    <div class="flecha" id="next" onclick="cambiar(1)">→</div>
+    <div class="navegacion">
+        <div class="flecha" onclick="cambiar(-1)">←</div>
+        <div class="flecha" onclick="cambiar(1)">→</div>
+    </div>
 
     <div class="indicador" id="contador"></div>
 </div>
@@ -336,4 +333,4 @@ function toggleMusic(){
 </script>
 
 </body>
-</html>
+</html> 
