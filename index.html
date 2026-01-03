@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>100 razones para amarte</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  background:black;
+  color:white;
+  font-family: 'Georgia', serif;
+  overflow-x:hidden;
+}
+
+.fondo-rosas{
+  position:fixed;
+  inset:0;
+  font-size:22px;
+  opacity:0.15;
+  pointer-events:none;
+  line-height:2.5;
+  text-align:center;
+}
+
+.contenedor{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:30px 20px;
+  text-align:center;
+}
+
+h1{
+  font-size:2.2em;
+  margin-bottom:20px;
+}
+
+p{
+  max-width:500px;
+  font-size:1.1em;
+  margin-bottom:25px;
+}
+
+button{
+  padding:12px 25px;
+  font-size:1em;
+  border:none;
+  border-radius:25px;
+  background:white;
+  color:black;
+  cursor:pointer;
+  margin:8px;
+}
+
+button:hover{
+  opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+
+<div class="fondo-rosas">
+🌹 🌹 🌹 🌹 🌹 🌹 🌹 🌹 🌹 🌹<br>
+🌹 🌹 🌹 🌹 🌹 🌹 🌹 🌹 🌹 🌹<br>
+🌹 🌹 🌹 🌹 🌹 🌹 🌹 🌹 🌹 🌹
+</div>
+
+<div class="contenedor">
+  <h1>100 razones para amarte 🥺💗</h1>
+
+  <p>
+    Esta canción cada que la escucho tú te me vienes a la mente.<br>
+    Esta canción es tuya, porque te la dedico mi vida 💜
+  </p>
+
+  <audio id="musica" src="cancion.mp3"></audio>
+
+  <button onclick="document.getElementById('musica').play()">
+    ▶ Reproducir canción
+  </button>
+
+  <button onclick="window.location.href='razones.html'">
+    💌 Entrar
+  </button>
+</div>
+
+</body>
+</html>
