@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>100 razones 💜</title>
+<title>100 razones para amarte 💗</title>
 
 <style>
 body{
@@ -13,10 +13,10 @@ body{
 }
 
 .wrapper{
-    padding:120px 20px;
+    padding:100px 20px;
     display:flex;
     flex-direction:column;
-    gap:140px;
+    gap:130px;
     align-items:center;
 }
 
@@ -28,55 +28,61 @@ body{
     cursor:pointer;
 }
 
-/* BASE DEL SOBRE */
-.envelope .base{
+/* CONTENEDOR (OCULTA TODO LO DE ADENTRO) */
+.envelope-inner{
     width:100%;
     height:100%;
-    background:linear-gradient(145deg,#5a189a,#7b2cbf);
+    position:relative;
+    overflow:hidden;
     border-radius:18px;
-    position:absolute;
-    bottom:0;
-    z-index:1;
     box-shadow:0 25px 60px rgba(0,0,0,0.45);
 }
 
-/* TAPA */
-.envelope .lid{
+/* BASE */
+.base{
     width:100%;
     height:100%;
-    background:linear-gradient(145deg,#7b2cbf,#9d4edd);
-    clip-path:polygon(0 0,100% 0,50% 55%);
-    border-radius:18px;
+    background:linear-gradient(145deg,#5a189a,#7b2cbf);
     position:absolute;
-    top:0;
-    z-index:3;
-    transition:transform 0.8s ease;
-    transform-origin:top;
+    bottom:0;
+    z-index:1;
 }
 
-/* PAPEL (TOTALMENTE OCULTO) */
+/* PAPEL (100% OCULTO) */
 .paper{
     position:absolute;
-    bottom:18px;
+    bottom:-160px;
     left:20px;
     width:300px;
     height:180px;
     background:#f8f0ff;
     border-radius:12px;
-    padding:25px;
+    padding:22px;
     box-sizing:border-box;
     color:#4a148c;
     text-align:center;
     font-style:italic;
     line-height:1.6;
-    transform:translateY(140px);
     transition:transform 0.9s ease;
     z-index:2;
 }
 
+/* TAPA */
+.lid{
+    width:100%;
+    height:100%;
+    background:linear-gradient(145deg,#7b2cbf,#9d4edd);
+    clip-path:polygon(0 0,100% 0,50% 55%);
+    position:absolute;
+    top:0;
+    z-index:3;
+    transform-origin:top;
+    transition:transform 0.9s ease;
+}
+
 /* ABIERTO */
 .envelope.open .paper{
-    transform:translateY(-80px);
+    transform:translateY(-170px);
 }
 .envelope.open .lid{
     transform:rotateX(180deg);
@@ -87,6 +93,7 @@ body{
     text-align:center;
     margin-bottom:25px;
     opacity:0.85;
+    font-size:0.95em;
 }
 
 /* PARTÍCULAS */
@@ -105,34 +112,73 @@ body{
 
 <body>
 
-<div class="wrapper">
-
-    <!-- CARTA EJEMPLO -->
-    <div>
-        <div class="title">💌 Toca la carta</div>
-        <div class="envelope" onclick="this.classList.toggle('open')">
-            <div class="paper">
-                1. Tu sonrisa 💗
-            </div>
-            <div class="base"></div>
-            <div class="lid"></div>
-        </div>
-    </div>
-
-    <div>
-        <div class="title">💜 Sigue bajando</div>
-        <div class="envelope" onclick="this.classList.toggle('open')">
-            <div class="paper">
-                2. Tus ojitos 🥺
-            </div>
-            <div class="base"></div>
-            <div class="lid"></div>
-        </div>
-    </div>
-
-</div>
+<div class="wrapper" id="cartas"></div>
 
 <script>
+const razones = [
+"Tu sonrisa","tus ojitos","tu pelo","tu risa","tus manos","tus labios",
+"tu forma de querer","tu sentido del humor","tu corazón","tu carácter",
+"tu inteligencia","la manera en la que piensas","tus pestañas","tu honestidad",
+"tu lealtad","tu voz","lo sensible que eres","tu niño interior","tus regaños",
+"tus celos","tu alegría","tu seguridad","tu perspectiva de todo","tu apoyo",
+"tu sencillez","tu cariño inmenso","tus chistes malos","tu carisma","tu calma",
+"la forma en que me aconsejas","la manera en la que me guías","tu timidez",
+"tu tristeza","tu amargura","tu atención","tu orgullo","tu fortaleza",
+"tu manera de hablar","tu manera de escuchar","tu energía",
+"la forma única que eres","tu madurez","lo linda que estás",
+"como me haces reír","como me haces amarte","tu amor","como me entiendes",
+"tus locuras","tus defectos","tus cualidades","tus valores","tus burlas",
+"tu paz","tu energía","lo mucho que duermes","tu forma de vestir",
+"lo mucho que te esfuerzas","el cómo te hago enojar","tus berrinches",
+"tus dones","tu ternura","tus manitas","tu optimismo","tu brillo","tu alma",
+"tu resistencia","tu toque a la vida","lo positivo que eres",
+"siempre muestras quién eres","tu transparencia","tus ronquidos jjj",
+"tu lado protector","tus 'te amo'","tus 'buenos días'","tus abrazos",
+"tu dedicación a lo que te gusta","el día que nos vimos por primera vez",
+"nuestra conexión","me comprendes","me escuchas","tu sarcasmo","cuando jugamos",
+"tus llamadas 🥺","tus gustos","tu estilo","tus 'te extraño 🥺'",
+"tu valentía","junto a ti todo es mejor","tus apodos hacia mí",
+"cuando me dedicas videos","me ayudas a creer en mí","tu paciencia",
+"tus besitos","la manera en la que me has hecho cambiar a bien",
+"la forma que soy cuando hablo contigo","tu amor a mí 🥺",
+"la forma en que expresas tus sentimientos",
+"TODO DE TI LO AMO 💘"
+];
+
+const cont = document.getElementById("cartas");
+
+razones.forEach((txt,i)=>{
+    cont.innerHTML += `
+    <div>
+        <div class="title">Razón ${i+1}</div>
+        <div class="envelope" onclick="this.classList.toggle('open')">
+            <div class="envelope-inner">
+                <div class="paper">${i+1}. ${txt}</div>
+                <div class="base"></div>
+                <div class="lid"></div>
+            </div>
+        </div>
+    </div>`;
+});
+
+// Carta final
+cont.innerHTML += `
+<div>
+  <div class="title">Razón para irme 🥹</div>
+  <div class="envelope" onclick="this.classList.toggle('open')">
+    <div class="envelope-inner">
+      <div class="paper">
+        Ninguna.  
+        Quiero que solo seas tú  
+        y nadie más 💗
+      </div>
+      <div class="base"></div>
+      <div class="lid"></div>
+    </div>
+  </div>
+</div>`;
+
+// partículas
 setInterval(()=>{
     const s=document.createElement("div");
     s.className="spark";
