@@ -2,192 +2,334 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>100 razones para amarte 💗</title>
+<title>100 razones para amarte 💜</title>
 
 <style>
+*{
+    box-sizing:border-box;
+    font-family:'Georgia', serif;
+}
+
 body{
     margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(180deg,#240046,#3c096c,#5a189a,#7b2cbf);
+    background:linear-gradient(180deg,#2b124c,#4b1b78,#2b124c);
     color:#f5e9ff;
+    overflow:hidden;
 }
 
-.wrapper{
-    padding:100px 20px;
+/* ---------- INICIO ---------- */
+#inicio{
+    position:absolute;
+    inset:0;
     display:flex;
     flex-direction:column;
-    gap:130px;
+    justify-content:center;
     align-items:center;
+    text-align:center;
+    padding:30px;
 }
 
-/* SOBRE */
-.envelope{
-    width:340px;
-    height:220px;
+#inicio h1{
+    font-size:2.5em;
+    margin-bottom:10px;
+}
+
+#inicio p{
+    font-size:1.1em;
+    max-width:500px;
+    opacity:0.9;
+}
+
+.music-btn{
+    margin-top:20px;
+    padding:14px 22px;
+    border:none;
+    border-radius:30px;
+    background:rgba(255,255,255,0.15);
+    color:#fff;
+    cursor:pointer;
+    font-size:1em;
+    backdrop-filter:blur(6px);
+    transition:0.3s;
+}
+
+.music-btn:hover{
+    background:rgba(255,255,255,0.3);
+    transform:scale(1.05);
+}
+
+.start-btn{
+    margin-top:30px;
+    padding:15px 30px;
+    border:none;
+    border-radius:30px;
+    background:#c084fc;
+    color:#2b124c;
+    font-size:1em;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.start-btn:hover{
+    transform:scale(1.08);
+}
+
+/* ---------- CARTAS ---------- */
+#cartas{
+    display:none;
+    height:100vh;
+    width:100vw;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+.sobre{
+    width:260px;
+    height:180px;
+    background:#3b1663;
+    border-radius:12px;
     position:relative;
     cursor:pointer;
+    box-shadow:0 0 25px rgba(192,132,252,0.4);
+    transition:0.4s;
 }
 
-/* CONTENEDOR (OCULTA TODO LO DE ADENTRO) */
-.envelope-inner{
-    width:100%;
-    height:100%;
-    position:relative;
-    overflow:hidden;
-    border-radius:18px;
-    box-shadow:0 25px 60px rgba(0,0,0,0.45);
-}
-
-/* BASE */
-.base{
-    width:100%;
-    height:100%;
-    background:linear-gradient(145deg,#5a189a,#7b2cbf);
-    position:absolute;
-    bottom:0;
-    z-index:1;
-}
-
-/* PAPEL (100% OCULTO) */
-.paper{
-    position:absolute;
-    bottom:-160px;
-    left:20px;
-    width:300px;
-    height:180px;
-    background:#f8f0ff;
-    border-radius:12px;
-    padding:22px;
-    box-sizing:border-box;
-    color:#4a148c;
-    text-align:center;
-    font-style:italic;
-    line-height:1.6;
-    transition:transform 0.9s ease;
-    z-index:2;
-}
-
-/* TAPA */
-.lid{
-    width:100%;
-    height:100%;
-    background:linear-gradient(145deg,#7b2cbf,#9d4edd);
-    clip-path:polygon(0 0,100% 0,50% 55%);
+.sobre::before{
+    content:"";
     position:absolute;
     top:0;
-    z-index:3;
-    transform-origin:top;
-    transition:transform 0.9s ease;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,transparent 50%,#4b1b78 50%);
+    border-radius:12px;
 }
 
-/* ABIERTO */
-.envelope.open .paper{
-    transform:translateY(-170px);
-}
-.envelope.open .lid{
-    transform:rotateX(180deg);
-}
-
-/* TITULO */
-.title{
+.papel{
+    position:absolute;
+    width:230px;
+    height:150px;
+    background:#f5e9ff;
+    color:#2b124c;
+    top:20px;
+    left:15px;
+    border-radius:8px;
+    padding:15px;
     text-align:center;
-    margin-bottom:25px;
-    opacity:0.85;
-    font-size:0.95em;
+    font-size:1em;
+    transform:translateY(0);
+    opacity:0;
+    transition:0.5s;
 }
 
-/* PARTÍCULAS */
-.spark{
-    position:fixed;
-    color:#c77dff;
-    font-size:14px;
-    animation:float 8s linear infinite;
+.sobre.abierto .papel{
+    transform:translateY(-130px);
+    opacity:1;
 }
-@keyframes float{
-    from{transform:translateY(110vh);opacity:0}
-    to{transform:translateY(-10vh);opacity:1}
+
+/* ---------- FLECHAS ---------- */
+.flecha{
+    position:absolute;
+    top:50%;
+    font-size:2.5em;
+    cursor:pointer;
+    user-select:none;
+    padding:10px;
+    opacity:0.7;
+    transition:0.3s;
+}
+
+.flecha:hover{
+    opacity:1;
+    transform:scale(1.2);
+}
+
+#prev{ left:20px; }
+#next{ right:20px; }
+
+.indicador{
+    position:absolute;
+    bottom:20px;
+    font-size:0.9em;
+    opacity:0.8;
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrapper" id="cartas"></div>
+<!-- ---------- AUDIO ---------- -->
+<audio id="audio" loop>
+    <source src="cancion.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ---------- INICIO ---------- -->
+<div id="inicio">
+    <h1>100 razones para amarte 🥺💗</h1>
+    <p>
+        Esta canción cada que la escucho tú te me vienes a la mente.<br>
+        Esta canción es tuya, porque te la dedico mi vida.
+    </p>
+
+    <button class="music-btn" onclick="toggleMusic()">🎵 Reproducir canción</button>
+    <button class="start-btn" onclick="empezar()">Abrir cartas 💌</button>
+</div>
+
+<!-- ---------- CARTAS ---------- -->
+<div id="cartas">
+    <div class="flecha" id="prev" onclick="cambiar(-1)">←</div>
+
+    <div class="sobre" onclick="abrirCarta()">
+        <div class="papel" id="textoCarta"></div>
+    </div>
+
+    <div class="flecha" id="next" onclick="cambiar(1)">→</div>
+
+    <div class="indicador" id="contador"></div>
+</div>
 
 <script>
 const razones = [
-"Tu sonrisa","tus ojitos","tu pelo","tu risa","tus manos","tus labios",
-"tu forma de querer","tu sentido del humor","tu corazón","tu carácter",
-"tu inteligencia","la manera en la que piensas","tus pestañas","tu honestidad",
-"tu lealtad","tu voz","lo sensible que eres","tu niño interior","tus regaños",
-"tus celos","tu alegría","tu seguridad","tu perspectiva de todo","tu apoyo",
-"tu sencillez","tu cariño inmenso","tus chistes malos","tu carisma","tu calma",
-"la forma en que me aconsejas","la manera en la que me guías","tu timidez",
-"tu tristeza","tu amargura","tu atención","tu orgullo","tu fortaleza",
-"tu manera de hablar","tu manera de escuchar","tu energía",
-"la forma única que eres","tu madurez","lo linda que estás",
-"como me haces reír","como me haces amarte","tu amor","como me entiendes",
-"tus locuras","tus defectos","tus cualidades","tus valores","tus burlas",
-"tu paz","tu energía","lo mucho que duermes","tu forma de vestir",
-"lo mucho que te esfuerzas","el cómo te hago enojar","tus berrinches",
-"tus dones","tu ternura","tus manitas","tu optimismo","tu brillo","tu alma",
-"tu resistencia","tu toque a la vida","lo positivo que eres",
-"siempre muestras quién eres","tu transparencia","tus ronquidos jjj",
-"tu lado protector","tus 'te amo'","tus 'buenos días'","tus abrazos",
-"tu dedicación a lo que te gusta","el día que nos vimos por primera vez",
-"nuestra conexión","me comprendes","me escuchas","tu sarcasmo","cuando jugamos",
-"tus llamadas 🥺","tus gustos","tu estilo","tus 'te extraño 🥺'",
-"tu valentía","junto a ti todo es mejor","tus apodos hacia mí",
-"cuando me dedicas videos","me ayudas a creer en mí","tu paciencia",
-"tus besitos","la manera en la que me has hecho cambiar a bien",
-"la forma que soy cuando hablo contigo","tu amor a mí 🥺",
-"la forma en que expresas tus sentimientos",
-"TODO DE TI LO AMO 💘"
+"Tú sonrisa",
+"tus ojitos y tu lunar en uno de ellos",
+"tu pelo",
+"tu risa",
+"tus manos",
+"tus labios",
+"tu forma de querer",
+"tu sentido del humor",
+"tu corazón",
+"tu carácter",
+"tu inteligencia",
+"la manera en la que piensas",
+"tus pestañas",
+"tu honestidad",
+"tu lealtad",
+"tu voz",
+"lo sensible que eres",
+"tu niña interior",
+"tus regaños",
+"tus celos",
+"tu alegría",
+"tu seguridad",
+"tu perspectiva de todo",
+"tu apoyo",
+"tu sencillez",
+"tu cariño inmenso",
+"tus chistes malos",
+"tu carisma",
+"tu calma",
+"la forma en que me aconsejas",
+"la manera en que te preocupas por mí",
+"tu timidez",
+"tu tristeza",
+"tu amargura",
+"tu atención",
+"tu orgullo",
+"tu fortaleza",
+"tu manera de hablar",
+"tu manera de escuchar",
+"tu energía",
+"la forma única que eres",
+"tu madurez",
+"lo linda que estás",
+"como me haces reír",
+"como me haces amarte",
+"tu amor",
+"como me entiendes",
+"tus locuras",
+"tus defectos",
+"tus cualidades",
+"tus valores",
+"tus burlas",
+"tu paz",
+"tu energía",
+"lo mucho que duermes",
+"tu forma de vestir",
+"lo mucho que te esfuerzas",
+"el como te hago enojar",
+"tus berrinches",
+"tus dones",
+"tu ternura",
+"tus manitas",
+"tu optimismo",
+"tu brillo",
+"tu alma",
+"tu resistencia",
+"tu toque a la vida",
+"lo positiva que eres",
+"siempre muestras quien eres",
+"tu transparencia",
+"tus (Te quiero)",
+"tu lado protector",
+"tus (Te amo)",
+"tus (buenos días)",
+"tus abrazos",
+"tu dedicación a lo que te gusta",
+"el día que nos besamos por primera vez",
+"nuestra conexión",
+"me comprendes (aunque te enojas)",
+"me escuchas",
+"tus locuras",
+"tu orgullo",
+"tu sarcasmo",
+"tu forma de enojarte",
+"tus mensajes 🥺",
+"tus gustos",
+"tu estilo",
+"tus (Te extraño 🥺)",
+"tu valentía",
+"junto a ti todo es mejor",
+"tus apodos hacia mí",
+"cuando me dedicas videos",
+"me ayudas a creer en mí",
+"tu paciencia",
+"tus bechitos",
+"la manera en que me has hecho cambiar a bien",
+"la forma que soy cuando hablo contigo",
+"tu amor a mí 🥺",
+"la forma que expresas tus sentimientos",
+"TODO DE TI LO AMO 💘",
+"Ninguna. Quiero que solo seas tú y nadie más 🥹"
 ];
 
-const cont = document.getElementById("cartas");
+let actual = 0;
+let abierto = false;
 
-razones.forEach((txt,i)=>{
-    cont.innerHTML += `
-    <div>
-        <div class="title">Razón ${i+1}</div>
-        <div class="envelope" onclick="this.classList.toggle('open')">
-            <div class="envelope-inner">
-                <div class="paper">${i+1}. ${txt}</div>
-                <div class="base"></div>
-                <div class="lid"></div>
-            </div>
-        </div>
-    </div>`;
-});
+function empezar(){
+    document.getElementById("inicio").style.display="none";
+    document.getElementById("cartas").style.display="flex";
+    actualizar();
+}
 
-// Carta final
-cont.innerHTML += `
-<div>
-  <div class="title">Razón para irme 🥹</div>
-  <div class="envelope" onclick="this.classList.toggle('open')">
-    <div class="envelope-inner">
-      <div class="paper">
-        Ninguna.  
-        Quiero que solo seas tú  
-        y nadie más 💗
-      </div>
-      <div class="base"></div>
-      <div class="lid"></div>
-    </div>
-  </div>
-</div>`;
+function abrirCarta(){
+    const sobre = document.querySelector(".sobre");
+    sobre.classList.toggle("abierto");
+    abierto = !abierto;
+}
 
-// partículas
-setInterval(()=>{
-    const s=document.createElement("div");
-    s.className="spark";
-    s.innerText="✦";
-    s.style.left=Math.random()*100+"vw";
-    s.style.animationDuration=(Math.random()*4+4)+"s";
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),8000);
-},600);
+function cambiar(dir){
+    actual += dir;
+    if(actual < 0) actual = 0;
+    if(actual >= razones.length) actual = razones.length - 1;
+    document.querySelector(".sobre").classList.remove("abierto");
+    abierto = false;
+    actualizar();
+}
+
+function actualizar(){
+    document.getElementById("textoCarta").innerText = razones[actual];
+    document.getElementById("contador").innerText =
+        `Carta ${actual + 1} de ${razones.length}`;
+}
+
+const audio = document.getElementById("audio");
+let sonando = false;
+function toggleMusic(){
+    if(!sonando){ audio.play(); sonando=true; }
+    else{ audio.pause(); sonando=false; }
+}
 </script>
 
 </body>
