@@ -12,7 +12,7 @@
 
 body{
     margin:0;
-    background:linear-gradient(180deg,#2b124c,#4b1b78,#2b124c);
+    background:linear-gradient(180deg,#1a082d,#2b124c,#1a082d);
     color:#f5e9ff;
     overflow:hidden;
 }
@@ -29,6 +29,11 @@ body{
     padding:30px;
 }
 
+#inicio h1,
+#inicio p{
+    text-shadow:0 2px 6px rgba(0,0,0,0.6);
+}
+
 #inicio h1{
     font-size:2.5em;
     margin-bottom:10px;
@@ -36,8 +41,8 @@ body{
 
 #inicio p{
     font-size:1.1em;
-    max-width:500px;
-    opacity:0.9;
+    max-width:520px;
+    opacity:0.95;
 }
 
 .music-btn{
@@ -77,260 +82,4 @@ body{
 /* ---------- CARTAS ---------- */
 #cartas{
     display:none;
-    height:100vh;
-    width:100vw;
-    justify-content:center;
-    align-items:center;
-    position:relative;
-}
-
-.sobre{
-    width:260px;
-    height:180px;
-    background:#3b1663;
-    border-radius:12px;
-    position:relative;
-    cursor:pointer;
-    box-shadow:0 0 25px rgba(192,132,252,0.4);
-    transition:0.4s;
-}
-
-.sobre::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:linear-gradient(135deg,transparent 50%,#4b1b78 50%);
-    border-radius:12px;
-}
-
-.papel{
-    position:absolute;
-    width:230px;
-    height:150px;
-    background:#f5e9ff;
-    color:#2b124c;
-    top:20px;
-    left:15px;
-    border-radius:8px;
-    padding:15px;
-    text-align:center;
-    font-size:1em;
-    transform:translateY(0);
-    opacity:0;
-    transition:0.5s;
-}
-
-.sobre.abierto .papel{
-    transform:translateY(-130px);
-    opacity:1;
-}
-
-/* ---------- FLECHAS ---------- */
-.flecha{
-    position:absolute;
-    top:50%;
-    font-size:2.5em;
-    cursor:pointer;
-    user-select:none;
-    padding:10px;
-    opacity:0.7;
-    transition:0.3s;
-}
-
-.flecha:hover{
-    opacity:1;
-    transform:scale(1.2);
-}
-
-#prev{ left:20px; }
-#next{ right:20px; }
-
-.indicador{
-    position:absolute;
-    bottom:20px;
-    font-size:0.9em;
-    opacity:0.8;
-}
-</style>
-</head>
-
-<body>
-
-<!-- ---------- AUDIO ---------- -->
-<audio id="audio" loop>
-    <source src="cancion.mp3" type="audio/mpeg">
-</audio>
-
-<!-- ---------- INICIO ---------- -->
-<div id="inicio">
-    <h1>100 razones para amarte 🥺💗</h1>
-    <p>
-        Esta canción cada que la escucho tú te me vienes a la mente.<br>
-        Esta canción es tuya, porque te la dedico mi vida.
-    </p>
-
-    <button class="music-btn" onclick="toggleMusic()">🎵 Reproducir canción</button>
-    <button class="start-btn" onclick="empezar()">Abrir cartas 💌</button>
-</div>
-
-<!-- ---------- CARTAS ---------- -->
-<div id="cartas">
-    <div class="flecha" id="prev" onclick="cambiar(-1)">←</div>
-
-    <div class="sobre" onclick="abrirCarta()">
-        <div class="papel" id="textoCarta"></div>
-    </div>
-
-    <div class="flecha" id="next" onclick="cambiar(1)">→</div>
-
-    <div class="indicador" id="contador"></div>
-</div>
-
-<script>
-const razones = [
-"Tú sonrisa",
-"tus ojitos y tu lunar en uno de ellos",
-"tu pelo",
-"tu risa",
-"tus manos",
-"tus labios",
-"tu forma de querer",
-"tu sentido del humor",
-"tu corazón",
-"tu carácter",
-"tu inteligencia",
-"la manera en la que piensas",
-"tus pestañas",
-"tu honestidad",
-"tu lealtad",
-"tu voz",
-"lo sensible que eres",
-"tu niña interior",
-"tus regaños",
-"tus celos",
-"tu alegría",
-"tu seguridad",
-"tu perspectiva de todo",
-"tu apoyo",
-"tu sencillez",
-"tu cariño inmenso",
-"tus chistes malos",
-"tu carisma",
-"tu calma",
-"la forma en que me aconsejas",
-"la manera en que te preocupas por mí",
-"tu timidez",
-"tu tristeza",
-"tu amargura",
-"tu atención",
-"tu orgullo",
-"tu fortaleza",
-"tu manera de hablar",
-"tu manera de escuchar",
-"tu energía",
-"la forma única que eres",
-"tu madurez",
-"lo linda que estás",
-"como me haces reír",
-"como me haces amarte",
-"tu amor",
-"como me entiendes",
-"tus locuras",
-"tus defectos",
-"tus cualidades",
-"tus valores",
-"tus burlas",
-"tu paz",
-"tu energía",
-"lo mucho que duermes",
-"tu forma de vestir",
-"lo mucho que te esfuerzas",
-"el como te hago enojar",
-"tus berrinches",
-"tus dones",
-"tu ternura",
-"tus manitas",
-"tu optimismo",
-"tu brillo",
-"tu alma",
-"tu resistencia",
-"tu toque a la vida",
-"lo positiva que eres",
-"siempre muestras quien eres",
-"tu transparencia",
-"tus (Te quiero)",
-"tu lado protector",
-"tus (Te amo)",
-"tus (buenos días)",
-"tus abrazos",
-"tu dedicación a lo que te gusta",
-"el día que nos besamos por primera vez",
-"nuestra conexión",
-"me comprendes (aunque te enojas)",
-"me escuchas",
-"tus locuras",
-"tu orgullo",
-"tu sarcasmo",
-"tu forma de enojarte",
-"tus mensajes 🥺",
-"tus gustos",
-"tu estilo",
-"tus (Te extraño 🥺)",
-"tu valentía",
-"junto a ti todo es mejor",
-"tus apodos hacia mí",
-"cuando me dedicas videos",
-"me ayudas a creer en mí",
-"tu paciencia",
-"tus bechitos",
-"la manera en que me has hecho cambiar a bien",
-"la forma que soy cuando hablo contigo",
-"tu amor a mí 🥺",
-"la forma que expresas tus sentimientos",
-"TODO DE TI LO AMO 💘",
-"Ninguna. Quiero que solo seas tú y nadie más 🥹"
-];
-
-let actual = 0;
-let abierto = false;
-
-function empezar(){
-    document.getElementById("inicio").style.display="none";
-    document.getElementById("cartas").style.display="flex";
-    actualizar();
-}
-
-function abrirCarta(){
-    const sobre = document.querySelector(".sobre");
-    sobre.classList.toggle("abierto");
-    abierto = !abierto;
-}
-
-function cambiar(dir){
-    actual += dir;
-    if(actual < 0) actual = 0;
-    if(actual >= razones.length) actual = razones.length - 1;
-    document.querySelector(".sobre").classList.remove("abierto");
-    abierto = false;
-    actualizar();
-}
-
-function actualizar(){
-    document.getElementById("textoCarta").innerText = razones[actual];
-    document.getElementById("contador").innerText =
-        `Carta ${actual + 1} de ${razones.length}`;
-}
-
-const audio = document.getElementById("audio");
-let sonando = false;
-function toggleMusic(){
-    if(!sonando){ audio.play(); sonando=true; }
-    else{ audio.pause(); sonando=false; }
-}
-</script>
-
-</body>
-</html>
+    height
