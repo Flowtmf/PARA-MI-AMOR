@@ -1,77 +1,251 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Solo tú 💜</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Cachetoncita</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
 
-<style>
-body{
-  margin:0;
-  background:black;
-  color:white;
-  font-family:Georgia, serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  text-align:center;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.contenedor{
-  max-width:400px;
-  padding:25px;
-}
+        body {
+            background: linear-gradient(135deg, #1a0033 0%, #4a148c 100%);
+            min-height: 100vh;
+            font-family: 'Lora', serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
 
-h1{
-  font-size:1.8em;
-  margin-bottom:20px;
-}
+        /* Contenedor de corazones sutiles */
+        #hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-.opcion{
-  border:2px solid white;
-  border-radius:20px;
-  padding:12px;
-  margin:12px 0;
-  cursor:pointer;
-}
+        .heart {
+            position: absolute;
+            bottom: -5vh;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            animation: floatUp linear infinite;
+        }
 
-.opcion:hover{
-  background:white;
-  color:black;
-}
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.6;
+            }
+            80% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
 
-.error{
-  color:#ff7b7b;
-  margin-top:15px;
-}
-</style>
+        /* Diseño de la carta (Glassmorphism) */
+        .letter-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* Scrollbar personalizado y elegante */
+        .letter-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .letter-box::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        .letter-box::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e1bee7;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            text-align: justify;
+            letter-spacing: 0.3px;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            text-align: right;
+            margin-top: 40px;
+            color: #ce93d8;
+        }
+
+        /* Pantalla de mensaje efímero (cuando ya se leyó) */
+        #ephemeral-screen {
+            display: none;
+            text-align: center;
+            z-index: 2;
+            padding: 30px;
+        }
+
+        #ephemeral-screen h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #e1bee7;
+            margin-bottom: 20px;
+        }
+
+        #ephemeral-screen p {
+            font-size: 1.2rem;
+            text-align: center;
+            color: #ce93d8;
+        }
+
+        /* Responsividad para móviles */
+        @media (max-width: 600px) {
+            .letter-box {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            p {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="contenedor">
-  <h1>Solo alguien especial puede entrar 💜</h1>
+    <div id="hearts-container"></div>
 
-  <p>¿Qué eres para mí?</p>
+    <div id="ephemeral-screen">
+        <h2>Esta carta era efímera...</h2>
+        <p>Las palabras ya han sido entregadas y ahora viven eternamente en tu corazón. ♥️</p>
+    </div>
 
-  <div class="opcion" onclick="error()">Una persona cualquiera</div>
-  <div class="opcion" onclick="error()">Mi costumbre</div>
-  <div class="opcion" onclick="entrar()">Mi lugar seguro 🥺</div>
+    <div class="letter-box" id="letter-content">
+        <h1>Mi Cachetoncita, mi amor, Mi Sharon.</h1>
+        
+        <p>Tengo tantas cosas guardadas en el pecho, tantos latidos que llevan tu nombre, tanto por decirte... A veces siento que mi vocabulario se queda corto, que este sentimiento es inefable: tan inmenso, tan mágico y maravilloso que ninguna palabra escrita en el diccionario logra explicarlo por completo. Pero si de algo estoy absolutamente seguro, lo que respira en mí y lo que me mueve todos los días, es este amor tan puro y profundo que te tengo. Me encantas, mi niña. Me fascinas de una manera que va más allá de este mundo. Eres mi lugar seguro, mi paz, la luz más bonita que ha tocado mi vida.</p>
 
-  <div class="error" id="mensaje"></div>
-</div>
+        <p>Sé que en estos últimos días, semanas o meses, no hemos sentido la misma magia de antes. Sé que has sentido que bajé la intensidad, que me alejé o que me apagué un poquito, y tienes toda la razón. Lo reconozco con el corazón en la mano y con la mayor humildad. Me he sentido atrapado en un letargo, lidiando con un agotamiento emocional que me silenció, como si mi mente no supiera qué hacer ni cómo expresarse. Pero quiero que sepas una verdad sempiterna (esa que no tiene principio ni fin). bajo cualquier silencio, bajo cualquier distancia o torpeza mía, mi alma sigue estando perdidamente enamorada de ti. Demasiado. Nunca he dejado de amarte, ni un solo segundo mi amorshito hemochooo</p>
 
-<script>
-function error(){
-  document.getElementById("mensaje").textContent =
-  "No… intenta otra vez 🥺";
-}
+        <p>Te pido perdón desde lo más profundo de mi ser. Perdóname por no haber sabido cuidarnos como lo mereces, por haber dejado que mi propio peso nublara lo nuestro. Sé que mi desconexión te afectó inconscientemente, y me duele el alma saber que mi actitud te hizo sentir menos amada o te hizo dudar de lo que somos. No quiero que sientas jamás que mi amor se ha desvanecido, que ya no soy el mismo, o que ya no vale la pena apostar por nosotros. Porque tú eres mi serendipia, ese hallazgo hermoso, inesperado y perfecto que le dio sentido a todo, y por ti vale la pena absolutamente todo 🥺♥️</p>
 
-function entrar(){
-  window.location.href = "razones.html";
-}
-</script>
+        <p>Quiero que sepas que te admiro de una forma inmensa. Eres la mujer más hermosa que mis ojos han tenido el privilegio de ver, pero tu belleza va mucho más allá de lo físico. Es tu esencia, tu dulzura, la manera en que iluminas cualquier lugar en el que estás. Eres mi querencia, ese rincón del universo donde mi alma se siente en casa, protegida y llena de paz. Tú no me restas, tú no me haces sentir mal ni menos motivado; al contrario, eres una fuente inagotable de inspiración para mí. Eres mi motor.</p>
 
+        <p>Me da un miedo inmenso pensar en un amanecer donde no estés. Sin ti, mis mañanas perderían su brillo y los atardeceres su magia, porque tú eres la epifanía más hermosa de mi vida, ese rayito de luz que me hace ver lo maravilloso que es estar vivo. Ya descubrí que la belleza más pura y sincera en esta vida lleva tu nombre y tu apellido.</p>
+
+        <p>Por eso, mi amor, quiero que sepas que te quiero para toda mi vida. No te quiero solo para un rato, ni para una etapa. te quiero para todos mis amaneceres y todos mis anocheceres. Quiero un amor inmarcesible contigo, un amor que no se marchite nunca, que crezca, que se transforme y que se haga más fuerte con los años.</p>
+
+        <p>Conozco tus pensamientos sobre el futuro, sé que en tus planes no está el tener hijos, y abrazo cada una de tus decisiones con un respeto total y absoluto, porque mi prioridad eres tú. Pero, si en el mañana, mientras compartimos la vida entera, esa perspectiva florece, mi único deseo sería que nuestra hija fuera un reflejo exacto de ti. Alguien etérea y deslumbrante, llena de tu carisma, de tu sonrisa; alguien de quien me sentiría profundamente orgulloso y a quien amaría con todo mi ser, tal como amo con locura a su madre ♥️</p>
+
+        <p>Mi vida te prometo que volverás a ver a ese Yerik del que te enamoraste. Voy a darlo todo de mí, voy a amarte con la intensidad que mereces, cuidando cada detalle. Quiero abrazarte todos los días y que, en ese roce, sientas cómo mi piel reconoce a la tuya. Quiero besarte y tener la dulce certeza de que mis labios están tocando a la mujer más fascinante del universo. Quiero perderme en tus ojitos mirándome, porque son mi paisaje favorito.</p>
+
+        <p>Quiero amarte desde la libertad, siendo un refugio seguro para ti, entrelazando nuestras vidas para que siempre seamos uno solo en sintonía. A donde quiera que vaya, mis pensamientos te llevan a ti. A donde tú vayas, yo caminaré a tu lado, mi amor hermoso. Mi único propósito es cuidarte, hacerte inmensamente feliz y ver esa sonrisa tuya iluminar mis días, hoy, mañana y para toda la vida.</p>
+
+        <div class="signature">Mi Cachetoncita hemochaa.<br>TE AMOO MUCHO MUCHO ♥️♥️♥️</div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const letterContent = document.getElementById('letter-content');
+            const ephemeralScreen = document.getElementById('ephemeral-screen');
+            const heartsContainer = document.getElementById('hearts-container');
+
+            // Lógica efímera: Verificar si ya se abrió
+            if (localStorage.getItem('sharonLetterRead') === 'true') {
+                letterContent.style.display = 'none';
+                ephemeralScreen.style.display = 'block';
+            } else {
+                // Marcar como leída para la próxima vez
+                localStorage.setItem('sharonLetterRead', 'true');
+                crearCorazones();
+            }
+
+            // Función para crear corazones sutiles y elegantes de fondo
+            function crearCorazones() {
+                const totalHearts = 20; // Cantidad sutil, no empalagosa
+                for (let i = 0; i < totalHearts; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.classList.add('heart');
+                        heart.innerHTML = '♥';
+                        
+                        // Posición y tamaño aleatorios
+                        heart.style.left = Math.random() * 100 + 'vw';
+                        heart.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
+                        
+                        // Duración de animación aleatoria para movimiento natural
+                        const duration = Math.random() * 8 + 6; // Entre 6 y 14 segundos
+                        heart.style.animationDuration = duration + 's';
+                        
+                        heartsContainer.appendChild(heart);
+
+                        // Limpiar corazones que ya subieron y crear nuevos
+                        setTimeout(() => {
+                            heart.remove();
+                            crearCorazonUnico();
+                        }, duration * 1000);
+
+                    }, i * 400); // Aparecen progresivamente
+                }
+            }
+
+            function crearCorazonUnico() {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '♥';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
+                const duration = Math.random() * 8 + 6;
+                heart.style.animationDuration = duration + 's';
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                    crearCorazonUnico();
+                }, duration * 1000);
+            }
+        });
+    </script>
 </body>
 </html>
